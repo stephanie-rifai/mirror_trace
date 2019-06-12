@@ -17,8 +17,7 @@
 
 var materials = {
 		'mirror' : [false, true, true, true, true, true, true, true],
-		'file_names' : ["https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/master/sample.png", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/master/trialh1.png", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/master/trialh2.png", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/master/trialh3.png", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/master/trial1.png", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/master/trial2.png", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/master/trial3.png", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/master/sample.png"],
-		'xstarts' : [47,	27,		40,		280,		27, 40, 280, 33],
+		'file_names' : []
 		'ystarts' : [256,	275,	45,		276,		275, 45, 276, 250],
 		'xends' :   [344,	370,	368,	33,			370, 368, 33, 47],
 		'yends' :    [260,	28,		267,	250,		28,267,250, 256]
