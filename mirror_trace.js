@@ -17,7 +17,7 @@
 
 var materials = {
 		'mirror' : [false, true, true, true, true, true, true, true],
-		'file_names' : []
+		'file_names' : ["https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/master/trialh1.png"]
 		'ystarts' : [256,	275,	45,		276,		275, 45, 276, 250],
 		'xends' :   [344,	370,	368,	33,			370, 368, 33, 47],
 		'yends' :    [260,	28,		267,	250,		28,267,250, 256]
