@@ -18,10 +18,10 @@
 var materials = {
 		'mirror' : [false, true, true, true, true, true, true, true],
 		'file_names' : ["https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/master/1hard.png", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/master/1easy.png"],
-		'xstarts' : [27,	275],
-		'ystarts' : [275,	275],
-		'xends' :   [370,	370],
-		'yends' :   [28,	28]
+		'xstarts' : [27,	27,		40,		280,		27, 40, 280, 33]//,
+		//'ystarts' : [275,	275,	45,		276,		275, 45, 276, 250],
+		//'xends' :   [370,	370,	368,	33,			370, 368, 33, 47],
+		//'yends' :    [28,	28,		267,	250,		28,267,250, 256]
 	}
 // var materials = {
 // 		'mirror' : [false, true, true, true, true, true, true, true],
