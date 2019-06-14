@@ -16,7 +16,7 @@
 // the images posted on github all have the same total line length and 15 segments 
 
 var materials = {
-		'mirror' : [false, true, true, true, true, true, true, true],
+		'mirror' : [true, true, true, true, true, true, true, true],
 		'file_names' : ["https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/master/1hard.png", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/master/1easy.png"],
 		'xstarts' : [27,	27,		40,		280,		40,		383,	352],
 		'ystarts' : [275,	275,	45,		276,		45,		265,	28],
