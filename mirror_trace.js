@@ -21,7 +21,7 @@ var materials = {
 		'xstarts' : [27,	27,		40,		280,		40,		383,	352],
 		'ystarts' : [275,	275,	45,		276,		45,		265,	28],
 		'xends' :   [363,	370,	368,	33,			368,	28,		35],
-		'yends' :    [226,	28,		267,	250,		267,	15,		175]
+		'yends' :    [26,	28,		267,	250,		267,	15,		175]
 	}
 // var materials = {
 // 		'mirror' : [false, true, true, true, true, true, true, true],
