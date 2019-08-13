@@ -17,7 +17,7 @@
 
 var materials = {
 		'mirror' : [true, true, true, true, true, true, true, true],
-		'file_names' : ["https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/master/1hard.png", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/master/1easy.png"],
+		'file_names' : ["https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/Image1.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/Image2.PNG"],
 		'xstarts' : [27,	27,		40,		280,		40,		383,	352],
 		'ystarts' : [270,	265,	45,		276,		45,		265,	28],
 		'xends' :   [375,	375,	368,	33,			368,	28,		35],
