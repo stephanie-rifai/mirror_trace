@@ -16,12 +16,12 @@
 // the images posted on github all have the same total line length and 15 segments 
 
 var materials = {
-		'mirror' : [true, true, true, true, true, true, true, true],
+		'mirror' : [true, true, true, true, true, true, true, true,true, true, true, true, true],
 		'file_names' : ["https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_1.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_2.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_3.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_4.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_5.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_6.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_7.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_8.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_9.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_10.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_11.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_12.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_13.PNG"],
-		'xstarts' : [94,	93,		40,		280,		40,		383,	352, 27,	27,		40,		280,		40,		383],
-		'ystarts' : [258,	258,	45,		276,		45,		265,	28, 265,	265,	45,		276,		45,		265],
-		'xends' :   [327,	321,	368,	33,			368,	28,		35, 75,	375,	368,	33,			368,	28],
-		'yends' :    [25,	24,		267,	250,		267,	15,		175, 28,	28,		267,	250,		267,	15]
+		'xstarts' : [95, 94, 98, 98, 97, 96, 97, 98, 98, 90, 92, 96, 327],
+		'ystarts' : [257, 257, 255, 252, 253, 252, 252, 253, 255, 197, 248, 257, 248],
+		'xends' :   [35, 333, 335, 110, 336, 337, 344, 336, 338, 336, 104, 340, 109],
+		'yends' :   [15, 12, 10, 6, 11, 8, 8, 6, 13, 12, 12, 14, 12]
 	}
 // var materials = {
 // 		'mirror' : [false, true, true, true, true, true, true, true],
