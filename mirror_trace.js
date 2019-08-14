@@ -18,10 +18,10 @@
 var materials = {
 		'mirror' : [true, true, true, true, true, true, true, true],
 		'file_names' : ["https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_1.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_2.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_3.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_4.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_5.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_6.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_7.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_8.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_9.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_10.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_11.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_12.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_13.PNG"],
-		'xstarts' : [309,	27,		40,		280,		40,		383,	352, 27,	27,		40,		280,		40,		383],
-		'ystarts' : [38,	265,	45,		276,		45,		265,	28, 265,	265,	45,		276,		45,		265],
-		'xends' :   [78,	375,	368,	33,			368,	28,		35, 75,	375,	368,	33,			368,	28],
-		'yends' :    [272,	28,		267,	250,		267,	15,		175, 28,	28,		267,	250,		267,	15]
+		'xstarts' : [72,	27,		40,		280,		40,		383,	352, 27,	27,		40,		280,		40,		383],
+		'ystarts' : [280,	265,	45,		276,		45,		265,	28, 265,	265,	45,		276,		45,		265],
+		'xends' :   [295,	375,	368,	33,			368,	28,		35, 75,	375,	368,	33,			368,	28],
+		'yends' :    [53,	28,		267,	250,		267,	15,		175, 28,	28,		267,	250,		267,	15]
 	}
 // var materials = {
 // 		'mirror' : [false, true, true, true, true, true, true, true],
@@ -81,7 +81,7 @@ function do_mirror() {
 	var startRadius = 15;
 	var xend = materials.xends[trialnumber];
 	var yend = materials.yends[trialnumber];
-	var endRadius = 7;
+	var endRadius = 15;
 
 	
 	//states to track
