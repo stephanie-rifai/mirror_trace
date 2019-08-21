@@ -18,10 +18,10 @@
 var materials = {
 		'mirror' : [true, true, true, true, true, true, true, true, true, true, true, true, true],
 		'file_names' : ["https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_1.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_2.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_3.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_4.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_5.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_6.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_7.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_8.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_9.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_10.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_11.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_12.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_13.PNG"],
-		'xstarts' : [95,	94,		98,		325,	92, 96, 97, 98, 98, 90, 92, 96, 327],
-		'ystarts' : [257,	257,	255,	252,	260, 252, 252, 253, 255, 197, 248, 257, 248],
-		'xends' :   [325,	322,	315,	325,	325, 337, 344, 336, 338, 336, 104, 340, 109],
-		'yends' :   [25,	265,	25,		6,		20, 8, 8, 6, 13, 12, 12, 14, 12]
+		'xstarts' : [95,	94,		92,		315,	92, 	92, 	97, 98, 98, 90, 92, 96, 327],
+		'ystarts' : [257,	257,	260,	252,	260, 	260, 	252, 253, 255, 197, 248, 257, 248],
+		'xends' :   [325,	330,	315,	315,	315, 	329, 	344, 336, 338, 336, 104, 340, 109],
+		'yends' :   [25,	265,	25,		30,		23, 	26, 	8, 6, 13, 12, 12, 14, 12]
 	}
 // var materials = {
 // 		'mirror' : [false, true, true, true, true, true, true, true],
