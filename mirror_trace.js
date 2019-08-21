@@ -20,7 +20,7 @@ var materials = {
 		'file_names' : ["https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_1.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_2.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_3.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_4.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_5.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_6.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_7.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_8.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_9.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_10.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_11.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_12.PNG","https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/test_17/image_13.PNG"],
 		'xstarts' : [95,	94,		92,		315,	92, 	92, 	88, 	91, 	90, 	90, 	319, 	90, 	318],
 		'ystarts' : [257,	257,	260,	262,	260, 	260, 	263, 	263, 	257, 	255, 	263, 	257, 	262],
-		'xends' :   [325,	327,	317,	315,	315, 	318, 	316, 	313, 	315, 	330, 	326, 	323, 	84],
+		'xends' :   [325,	327,	316,	315,	315, 	318, 	316, 	314, 	315, 	330, 	326, 	323, 	84],
 		'yends' :   [25,	262,	27,		30,		26, 	33, 	30, 	27, 	25, 	90, 	34, 	30, 	35]
 	}
 // var materials = {
