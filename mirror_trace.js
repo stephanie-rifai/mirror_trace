@@ -194,6 +194,7 @@ function do_mirror() {
 
 			//check to see where we are drawing
 			if (p[0]+p[1]+p[2] < 200) {
+				console.log(p[1]+p[2]+p[0])
 				if(inline) {
 					distance_inline = distance_inline + distance_current;
 				} else {
