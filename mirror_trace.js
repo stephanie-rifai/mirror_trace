@@ -104,7 +104,7 @@ currentRefresh = 0;
 //drawing contexts for cursor area and mirrored area
 canvas = document.querySelector('#paint');
 ctx = canvas.getContext('2d');
-canvas_mirror = document.querySelector('#mirror');
+canvas_mirror = document.querySelector('#paint');
 ctx_mirror = canvas_mirror.getContext('2d');
 
 //load the image to trace
@@ -115,11 +115,7 @@ var imageObj = new Image();
    ctx.globalAlpha=0.4;
    
    ctx.beginPath();
-	if (mirror) {
-		ctx.arc(xstart, ystart, startRadius, 0, 2 * Math.PI, false);
-	} else {
-		ctx.arc(xstart, ystart, startRadius, 0, 2 * Math.PI, false);
-	}
+   ctx.arc(xstart, ystart, startRadius, 0, 2 * Math.PI, false);
    ctx.fillStyle = 'green';
    ctx.fill();
    ctx_mirror.globalAlpha=1;
