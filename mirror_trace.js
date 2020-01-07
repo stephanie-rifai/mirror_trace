@@ -95,13 +95,14 @@ function do_mirror() {
 	//load the image to trace
 	var imageObj = new Image();
 	imageObj.onload = function () {
+		ctx.beginPath();
 		ctx.arc(xstart, ystart, startRadius, 0, 2 * Math.PI, false);
 		ctx.fillStyle = 'green';
 		ctx.fill();
+		ctx.stroke()
 		ctx_mirror.drawImage(imageObj, 0, 0, mywidth, myheight);
 		ctx_mirror.globalAlpha = 0.4;
 		ctx.globalAlpha = 0.4;
-		ctx.beginPath();
 		
 		ctx_mirror.globalAlpha = 1;
 		ctx.globalAlpha = 1;
