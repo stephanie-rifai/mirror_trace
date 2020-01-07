@@ -98,10 +98,10 @@ function do_mirror() {
 		ctx_mirror.drawImage(imageObj, 0, 0, mywidth, myheight);
 		ctx_mirror.globalAlpha = 0.4;
 		ctx.globalAlpha = 0.4;
-		ctx.beginPath();
-		ctx.arc(xstart, ystart, startRadius, 0, 2 * Math.PI, false);
-		ctx.fillStyle = 'green';
-		ctx.fill();
+		ctx_mirror.beginPath();
+		ctx_mirror.arc(xstart, ystart, startRadius, 0, 2 * Math.PI, false);
+		ctx_mirror.fillStyle = 'green';
+		ctx_mirror.fill();
 		ctx_mirror.globalAlpha = 1;
 		ctx.globalAlpha = 1;
 		document.getElementById("status").innerHTML = "Click the green circle to begin this trial";
