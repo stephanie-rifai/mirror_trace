@@ -62,11 +62,6 @@ var endTime = 0;
 var lastRefresh = 0;
 var currentRefresh = 0;
 canvas = document.querySelector('#mirror');
-for(var i = 0; i < materials.file_names.length(); i++){
-	trialnumber = i;
-	canvas.getContext('2d').clearRect(0,0,canvas.width, canvas.length);
-	do_mirror();
-}
 function do_mirror() {
 	//load materials
 	var imagePath = materials.file_names[trialnumber];
@@ -364,4 +359,6 @@ function do_mirror() {
 			}
 		});
 	}
+	trialnumber += 1;
+	if(trialnumber < materials.file_names.length()) do_mirror();
 }
