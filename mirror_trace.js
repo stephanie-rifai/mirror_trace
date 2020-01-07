@@ -63,7 +63,7 @@ var lastRefresh = 0;
 var currentRefresh = 0;
 function do_mirror() {
 	//load materials
-	document.querySelector("#number").innerHTML = "Trial number "  + trialnumber.toString() + "";
+	document.getElementById("number").innerHTML = "Trial number "  + trialnumber.toString();
 	var imagePath = materials.file_names[trialnumber];
 	mirror = materials.mirror[trialnumber];
 	var xstart = materials.xstarts[trialnumber];
