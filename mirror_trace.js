@@ -148,7 +148,7 @@ function do_mirror() {
 		if (cendRadius < endRadius) {
 			if (drawing) {
 				drawing = false;
-				finished = true;
+				if(trialnumber >= materials.file_names.length-1) finished = true;
 				if (saveTrace) {
 					saveCanvas();
 					//call save function
@@ -359,6 +359,4 @@ function do_mirror() {
 			}
 		});
 	}
-	trialnumber += 1;
-	if(trialnumber < materials.file_names.length()) do_mirror();
 }
