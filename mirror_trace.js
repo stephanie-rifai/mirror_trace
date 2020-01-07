@@ -61,9 +61,9 @@ var startTime = 0;
 var endTime = 0;
 var lastRefresh = 0;
 var currentRefresh = 0;
-canvas = document.querySelector('#mirror');
 function do_mirror() {
 	//load materials
+	document.querySelector("#number").innerHTML = "Trial number "  + trialnumber.toString();
 	var imagePath = materials.file_names[trialnumber];
 	mirror = materials.mirror[trialnumber];
 	var xstart = materials.xstarts[trialnumber];
@@ -89,6 +89,7 @@ function do_mirror() {
 	lastRefresh = 0;
 	currentRefresh = 0;
 	//drawing contexts for cursor area and mirrored area
+	canvas = document.querySelector('#mirror');
 	ctx = canvas.getContext('2d');
 	canvas_mirror = document.querySelector('#mirror');
 	ctx_mirror = canvas_mirror.getContext('2d');
