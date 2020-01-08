@@ -122,7 +122,7 @@ function do_mirror() {
 					trialnumber += 1;
 					imageObj.remove();
 					imageObj = null;
-					alert("new trial");
+					document.getElementById("number").innerHTML = "new " + trialnumber.toString();
 					ctx_mirror.clearRect(0,0, canvas_mirror.width, canvas_mirror.height);
 					canvas.clearRect(0,0, canvas.width, canvas.height);
 					init();
