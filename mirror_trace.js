@@ -159,8 +159,7 @@ function do_mirror() {
 					trialnumber++;
 					ctx.clearRect(0,0,canvas.width, canvas.height);
 					ctx.clearRect(0,0,canvas.width, canvas.height);
-					imageObj.remove();	
-					ctx_mirror.drawImage(imageObj, 0, 0, mywidth, myheight);
+					imageObj.remove();
 					do_mirror();
 				}
 			}
