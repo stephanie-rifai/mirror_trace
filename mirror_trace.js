@@ -154,13 +154,17 @@ function do_mirror() {
 					saveCanvas();
 					//call save function
 				}
-				if(trialnumber >= materials.file_names.length-1) finished = true;
+				if(trialnumber >= materials.file_names.length-1){
+					finished = true;
+				}
 				else{
-					trialnumber++;
+					trialnumber += 1;
+					document.getElementById("number").innerHTML = "NEW TRIAL NUMBER " + trialnumber.toString();
 					imageObj.remove();
 					imageObj = null;
 					ctx.clearRect(0,0,canvas.width, canvas.height);
 					ctx_mirror.clearRect(0,0,canvas.width, canvas.height);
+					wait(1000);
 					do_mirror();
 				}
 			}
