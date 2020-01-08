@@ -63,7 +63,7 @@ var lastRefresh = 0;
 var currentRefresh = 0;
 function do_mirror() {
 	//load materials
-	
+	document.getElementById("number").innerHTML = "Trial number: " + trialnumber.toString();
 	//drawing contexts for cursor area and mirrored area
 	canvas = document.querySelector('#mirror');
 	ctx = canvas.getContext('2d');
