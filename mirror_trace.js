@@ -63,41 +63,15 @@ var endTime = 0;
 var lastRefresh = 0;
 var currentRefresh = 0;
 function do_mirror() {
-	trialnumber =newtrialnumber;
-	//load materials
-	document.getElementById("number").innerHTML = "Trial number: " + trialnumber.toString();
-	//drawing contexts for cursor area and mirrored area
-	canvas = document.querySelector('#mirror');
-	ctx = canvas.getContext('2d');
-	canvas_mirror = document.querySelector('#mirror');
-	ctx_mirror = canvas_mirror.getContext('2d');
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	ctx_mirror.clearRect(0,0,canvas_mirror.width, canvas_mirror.height);
-	var imagePath = materials.file_names[trialnumber];
-	mirror = materials.mirror[trialnumber];
-	var xstart = materials.xstarts[trialnumber];
-	var ystart = materials.ystarts[trialnumber];
-	var startRadius = 15;
-	var xend = materials.xends[trialnumber];
-	var yend = materials.yends[trialnumber];
-	var endRadius = 15;
-	//states to track
-	drawing = false;
-	finished = false;
-	score = 0;
-	timeDiff = 0;
-	timeFinished = 0;
+	var imagePath = null;
+	var xstart = 0;
+	var ystart = 0;
+	var startRadius = 0;
+	var xend = 0;
+	var yend = 0;
+	var endradius = 0;
 	var inline = false;
-	crossings = 0;
-	distance_total = 0;
-	distance_current = 0;
-	distance_inline = 0;
-	distance_offline = 0;
-	startTime = 0;
-	endTime = 0;
-	lastRefresh = 0;
-	currentRefresh = 0;
-	//load the image to trace
+	init();
 	var imageObj = new Image();
 	imageObj.onload = function () {
 		ctx_mirror.drawImage(imageObj, 0, 0, mywidth, myheight);
@@ -116,6 +90,7 @@ function do_mirror() {
 	//defines data structure for mouse movement
 	var mouse = { x: 0, y: 0 };
 	var mouseold = { x: 0, y: 0 };
+
 	/* Drawing on Paint App */
 	ctx_mirror.lineWidth = 1.2;
 	ctx_mirror.lineJoin = 'round';
@@ -158,18 +133,12 @@ function do_mirror() {
 				}
 				if(trialnumber >= materials.file_names.length-1){
 					finished = true;
-				}
-				else{
-					newtrialnumber += 1;
-					document.getElementById("number").innerHTML = "NEW TRIAL NUMBER " + trialnumber.toString();
+				}else{
+					trialnumber += 1;
 					imageObj.remove();
-					ctx_mirror.drawImage(imageObj, 0, 0, mywidth, myheight);
-					imageObj = null;
-					ctx.clearRect(0,0,canvas.width, canvas.height);
-					ctx_mirror.clearRect(0,0,canvas.width, canvas.height);
-					wait(1000);	
-					do_mirror();
-					return;
+					ctx_mirror.clearRect(0,0, canvas_mirror.width, canvas_mirror.height);
+					canvas.clearRect(0,0, canvas.width, canvas.height);
+					init();
 				}
 			}
 		}
@@ -376,5 +345,43 @@ function do_mirror() {
 				base64data: data
 			}
 		});
+	}
+	function init(){
+		trialnumber =newtrialnumber;
+		//load materials
+		document.getElementById("number").innerHTML = "Trial number: " + trialnumber.toString();
+		//drawing contexts for cursor area and mirrored area
+		canvas = document.querySelector('#mirror');
+		ctx = canvas.getContext('2d');
+		canvas_mirror = document.querySelector('#mirror');
+		ctx_mirror = canvas_mirror.getContext('2d');
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx_mirror.clearRect(0,0,canvas_mirror.width, canvas_mirror.height);
+		imagePath = materials.file_names[trialnumber];
+		mirror = materials.mirror[trialnumber];
+		xstart = materials.xstarts[trialnumber];
+		ystart = materials.ystarts[trialnumber];
+		startRadius = 15;
+		xend = materials.xends[trialnumber];
+		yend = materials.yends[trialnumber];
+		endRadius = 15;
+		//states to track
+		drawing = false;
+		finished = false;
+		score = 0;
+		timeDiff = 0;
+		timeFinished = 0;
+		inline = false;
+		crossings = 0;
+		distance_total = 0;
+		distance_current = 0;
+		distance_inline = 0;
+		distance_offline = 0;
+		startTime = 0;
+		endTime = 0;
+		lastRefresh = 0;
+		currentRefresh = 0;
+		//load the image to trace
+		imageObj = new Image();
 	}
 }
