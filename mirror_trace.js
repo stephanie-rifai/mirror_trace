@@ -347,7 +347,6 @@ function do_mirror() {
 		});
 	}
 	function init(){
-		trialnumber =newtrialnumber;
 		//load materials
 		document.getElementById("number").innerHTML = "Trial number: " + trialnumber.toString();
 		//drawing contexts for cursor area and mirrored area
