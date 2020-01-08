@@ -121,6 +121,8 @@ function do_mirror() {
 				}else{
 					trialnumber += 1;
 					imageObj.remove();
+					imageObj = null;
+					alert("new trial");
 					ctx_mirror.clearRect(0,0, canvas_mirror.width, canvas_mirror.height);
 					canvas.clearRect(0,0, canvas.width, canvas.height);
 					init();
