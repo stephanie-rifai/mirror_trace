@@ -70,26 +70,11 @@ function do_mirror() {
 	var xend = 0;
 	var yend = 0;
 	var endradius = 0;
+	var imageObj = null;
 	var inline = false;
+	var mouse = null;
+	var mouseold = null;
 	init();
-	var imageObj = new Image();
-	imageObj.onload = function () {
-		ctx_mirror.drawImage(imageObj, 0, 0, mywidth, myheight);
-		ctx_mirror.globalAlpha = 0.4;
-		ctx.globalAlpha = 0.4;
-		ctx_mirror.beginPath();
-		ctx_mirror.arc(xstart, ystart, startRadius, 0, 2 * Math.PI, false);
-		ctx_mirror.fillStyle = 'green';
-		ctx_mirror.fill();
-		ctx_mirror.globalAlpha = 1;
-		ctx.globalAlpha = 1;
-		document.getElementById("status").innerHTML = "Click the green circle to begin this trial";
-	};
-	imageObj.crossOrigin = "anonymous";
-	imageObj.src = imagePath;
-	//defines data structure for mouse movement
-	var mouse = { x: 0, y: 0 };
-	var mouseold = { x: 0, y: 0 };
 
 	/* Drawing on Paint App */
 	ctx_mirror.lineWidth = 1.2;
@@ -380,7 +365,23 @@ function do_mirror() {
 		endTime = 0;
 		lastRefresh = 0;
 		currentRefresh = 0;
-		//load the image to trace
 		imageObj = new Image();
+		imageObj.onload = function () {
+			ctx_mirror.drawImage(imageObj, 0, 0, mywidth, myheight);
+			ctx_mirror.globalAlpha = 0.4;
+			ctx.globalAlpha = 0.4;
+			ctx_mirror.beginPath();
+			ctx_mirror.arc(xstart, ystart, startRadius, 0, 2 * Math.PI, false);
+			ctx_mirror.fillStyle = 'green';
+			ctx_mirror.fill();
+			ctx_mirror.globalAlpha = 1;
+			ctx.globalAlpha = 1;
+			document.getElementById("status").innerHTML = "Click the green circle to begin this trial";
+		};
+		imageObj.crossOrigin = "anonymous";
+		imageObj.src = imagePath;
+		//defines data structure for mouse movement
+		var mouse = { x: 0, y: 0 };
+		var mouseold = { x: 0, y: 0 };
 	}
 }
