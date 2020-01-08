@@ -157,9 +157,10 @@ function do_mirror() {
 				if(trialnumber >= materials.file_names.length-1) finished = true;
 				else{
 					trialnumber++;
-					ctx.clearRect(0,0,canvas.width, canvas.height);
-					ctx.clearRect(0,0,canvas.width, canvas.height);
 					imageObj.remove();
+					imageObj = null;
+					ctx.clearRect(0,0,canvas.width, canvas.height);
+					ctx_mirror.clearRect(0,0,canvas.width, canvas.height);
 					do_mirror();
 				}
 			}
