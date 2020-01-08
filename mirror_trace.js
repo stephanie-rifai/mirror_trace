@@ -111,13 +111,13 @@ function do_mirror() {
 		var cendRadius = Math.sqrt(Math.pow(mouse.x - xend, 2) + Math.pow(mouse.y - yend, 2));
 		if (cendRadius < endRadius) {
 			if (drawing) {
-				drawing = false;
 				if (saveTrace) {
 					saveCanvas();
 					//call save function
 				}
 				if(trialnumber >= materials.file_names.length-1){
 					finished = true;
+					drawing = false;
 				}else{
 					trialnumber += 1;
 					imageObj.remove();
