@@ -381,7 +381,7 @@ function do_mirror() {
 		imageObj.crossOrigin = "anonymous";
 		imageObj.src = imagePath;
 		//defines data structure for mouse movement
-		var mouse = { x: 0, y: 0 };
-		var mouseold = { x: 0, y: 0 };
+		mouse = { x: 0, y: 0 };
+		mouseold = { x: 0, y: 0 };
 	}
 }
