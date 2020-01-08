@@ -44,6 +44,7 @@ var myheight = 300;
 var score = 0;
 var timeDiff = 0;
 var trialnumber = 0;
+var newtrialnumber = 0;
 var MID = 0;
 var drawing = false;
 var finished = false;
@@ -62,6 +63,7 @@ var endTime = 0;
 var lastRefresh = 0;
 var currentRefresh = 0;
 function do_mirror() {
+	trialnumber =newtrialnumber;
 	//load materials
 	document.getElementById("number").innerHTML = "Trial number: " + trialnumber.toString();
 	//drawing contexts for cursor area and mirrored area
@@ -158,14 +160,16 @@ function do_mirror() {
 					finished = true;
 				}
 				else{
-					trialnumber += 1;
+					newtrialnumber += 1;
 					document.getElementById("number").innerHTML = "NEW TRIAL NUMBER " + trialnumber.toString();
 					imageObj.remove();
+					ctx_mirror.drawImage(imageObj, 0, 0, mywidth, myheight);
 					imageObj = null;
 					ctx.clearRect(0,0,canvas.width, canvas.height);
 					ctx_mirror.clearRect(0,0,canvas.width, canvas.height);
-					wait(1000);
+					wait(1000);	
 					do_mirror();
+					return;
 				}
 			}
 		}
