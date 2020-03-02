@@ -1,367 +1,167 @@
-// This set of scripts implements a mirror trace task suitable for online use with Qualtrics
-// It was written by Bob Calin-Jageman
-// I was learning javascript as a I went; the code is stitched together from various online sources; sorry it is not very elegant
-// You can see a demo of this script in action at: https://dom.az1.qualtrics.com/jfe/form/SV_eeSj6E3YyI8nxdP
-// And you can see how pre-screening to ensure browser compatibility works here: https://dom.az1.qualtrics.com/jfe/form/SV_0lEq6SBvvT5LAj3
-// this object contains the materials for the task - 
-//   the mirror property say if that trial should be mirrored
-//   the file_names property give the file names for the images to use for each trial.
-// NOTE: Currently this points to images hosted on the github site for this project.  You can change this but be sure:
-// That the images are hosted on an https server with a flag set to allow cross-domain loading of images
-//    xstarts, ystarts are the coordinates for the green dot that sets the trial start
-//    xends, yends are the coordinates for where the trial ends
-// currently this displays 3 difficult trials (h1, h2, and h3) and 3 regular trials (4, 5, 6)
-// the images posted on github all have the same total line length and 15 segments 
-var materials = {
-	'mirror': [true, true, true, true, true, true, true, true, true, true, true, true, true],
-	'file_names': ["https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/live_8_21/image_1.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/live_8_21/image_2.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/live_8_21/image_3.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/live_8_21/image_4.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/live_8_21/image_5.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/live_8_21/image_6.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/live_8_21/image_7.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/live_8_21/image_8.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/live_8_21/image_9.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/live_8_21/image_10.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/live_8_21/image_11.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/live_8_21/image_12.PNG", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/live_8_21/image_13.PNG"],
-	'xstarts': [95, 94, 92, 315, 92, 92, 88, 91, 90, 90, 319, 90, 318],
-	'ystarts': [257, 257, 260, 262, 260, 260, 263, 263, 257, 255, 263, 257, 262],
-	'xends': [325, 327, 315, 315, 315, 318, 316, 315, 315, 330, 326, 323, 84],
-	'yends': [25, 262, 27, 30, 26, 33, 30, 27, 25, 90, 34, 30, 35]
-};
-// var materials = {
-// 		'mirror' : [false, true, true, true, true, true, true, true],
-// 		'file_names' : ["https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/master/sample.png", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/master/1hard.png", "https://raw.githubusercontent.com/stephanie-rifai/mirror_trace/master/1easy.png"],
-// 		'xstarts' : [45,	38,		38],
-// 		'ystarts' : [411,	398,	401],
-// 		'xends' :   [575,	567,	562],
-// 		'yends' :    [31,	49,		54]
-// 	}
-//	'xstarts' : [47,	27,		40,		280,		40,		383,	352],
-//		'ystarts' : [256,	275,	45,		276,		45,		265,	28],
-//		'xends' :   [344,	370,	368,	33,			368,	28,		35],
-//		'yends' :    [260,	28,		267,	250,		267,	15,		175]
-//for saving screenshots
-// the script can save screenshots of completed trials.  
-// to use this feature, set saveTrace to true and set saveScript to your server.  Your server will need a php script for accepting the files.
-// the php script is posted on github
-var saveScript = "https://calin-jageman.net/mirror_trace/save.php";
-var saveTrace = true;
-//image dimensions
-var mywidth = 400;
-var myheight = 300;
+//make "start" spot for each image
+//counter for 2 mins
+
+var lineLinks = [
+"https://i.imgur.com/yLfHkaI.png", "https://i.imgur.com/u7tdy48.png", "https://i.imgur.com/DKF2dDI.png", "https://i.imgur.com/oAQUbs2.png",
+"https://i.imgur.com/4oVQ06q.png", "https://i.imgur.com/sZLuHGs.png", "https://i.imgur.com/waCXqn4.png", "https://i.imgur.com/FzoRG7B.png",
+"https://i.imgur.com/AZD4FEY.png", "https://i.imgur.com/gl8xekc.png", "https://i.imgur.com/ynAjugT.png", "https://i.imgur.com/NQFPs6g.png",
+"https://i.imgur.com/dNygvrc.png", "https://i.imgur.com/DIXpc5s.png", "https://i.imgur.com/DRv2qsY.png", "https://i.imgur.com/OoAUWUP.png",
+"https://i.imgur.com/qks74Tv.png", "https://i.imgur.com/TBSc6c8.png", "https://i.imgur.com/UYQhbo2.png", "https://i.imgur.com/RYxdwof.png",
+
+"https://i.imgur.com/7xxSa6t.png", "https://i.imgur.com/RAGWtxv.png", "https://i.imgur.com/y0H6FuR.png", "https://i.imgur.com/3SOCqUr.png",
+"https://i.imgur.com/9weOQDK.png", "https://i.imgur.com/J5YI0JL.png", "https://i.imgur.com/2qFX9rF.png", "https://i.imgur.com/UZpL29U.png",
+"https://i.imgur.com/Et5t8yO.png", "https://i.imgur.com/WOdS5vY.png", "https://i.imgur.com/VVsUtlg.png", "https://i.imgur.com/OON78M0.png",
+"https://i.imgur.com/wMgWnAi.png", "https://i.imgur.com/gkVuV27.png", "https://i.imgur.com/0g5kcDj.png", "https://i.imgur.com/rRGv7Wp.png",
+"https://i.imgur.com/DiVt3uN.png", "https://i.imgur.com/GJ1Pmzc.png", "https://i.imgur.com/g4uKU90.png", "https://i.imgur.com/2PCFkIo.png",
+
+"https://i.imgur.com/K1HCwZ8.png", "https://i.imgur.com/BrHAU6p.png", "https://i.imgur.com/HnaVtBh.png", "https://i.imgur.com/1SGxzEe.png",
+"https://i.imgur.com/VY6b7wp.png", "https://i.imgur.com/w0q05O7.png", "https://i.imgur.com/M0HSj2P.png", "https://i.imgur.com/a8a1Naa.png",
+"https://i.imgur.com/aorqFPa.png", "https://i.imgur.com/RYiYLNG.png", "https://i.imgur.com/tVQW7ng.png", "https://i.imgur.com/20EN0Du.png",
+"https://i.imgur.com/Vk5dIQo.png", "https://i.imgur.com/sEPhElS.png", "https://i.imgur.com/RMQxRPW.png", "https://i.imgur.com/NCqnXdt.png",
+"https://i.imgur.com/aVgQxSj.png", "https://i.imgur.com/PiZ2HVD.png", "https://i.imgur.com/pNGF2KU.png", "https://i.imgur.com/p0TV3MT.png",
+
+"https://i.imgur.com/NBkyamc.png", "https://i.imgur.com/NxLHJ5a.png", "https://i.imgur.com/W6e7XlP.png", "https://i.imgur.com/aRQlG41.png",
+"https://i.imgur.com/hKFZFKp.png", "https://i.imgur.com/U04LkQM.png", "https://i.imgur.com/sv8dgix.png", "https://i.imgur.com/GoQQ0Fr.png",
+"https://i.imgur.com/aEUZjJd.png", "https://i.imgur.com/WIj4Jrs.png", "https://i.imgur.com/FNklPa7.png", "https://i.imgur.com/JeEL81m.png",
+"https://i.imgur.com/x7gFOsq.png", "https://i.imgur.com/DX9fvgD.png", "https://i.imgur.com/anybXDD.png", "https://i.imgur.com/ZY8fOyA.png",
+"https://i.imgur.com/vC8tHqS.png", "https://i.imgur.com/5q8ulGO.png", "https://i.imgur.com/CTeOqgM.png", "https://i.imgur.com/7Cxlrz1.png",
+
+"https://i.imgur.com/Nvq9C2J.png", "https://i.imgur.com/KWGTcew.png", "https://i.imgur.com/QksaiWl.png", "https://i.imgur.com/kxnEHbG.png",
+"https://i.imgur.com/KhMWIUk.png", "https://i.imgur.com/10AMyIP.png", "https://i.imgur.com/37VmN56.png", "https://i.imgur.com/As4y8oK.png", 
+"https://i.imgur.com/711nvA6.png", "https://i.imgur.com/ucC7vSf.png", "https://i.imgur.com/48Oyxf2.png", "https://i.imgur.com/XF4kr4S.png",
+"https://i.imgur.com/mxCyt3F.png", "https://i.imgur.com/6o1djYv.png", "https://i.imgur.com/OQ90eoC.png", "https://i.imgur.com/1attmiH.png",
+"https://i.imgur.com/86m4I1X.png", "https://i.imgur.com/D5b00mC.png", "https://i.imgur.com/Lfrn15h.png", "https://i.imgur.com/Aa2CGcy.png"
+]
+
+
+//important variables
 var score = 0;
-var timeDiff = 0;
-var trialnumber = 0;
-var MID = 0;
-var drawing = false;
-var finished = false;
-var timeFinished = 0;
-var canvas;
-var ctx;
-var canvas_mirror;
-var ctx_mirror;
-var crossings = 0;
-var distance_total = 0;
-var distance_current = 0;
-var distance_inline = 0;
-var distance_offline = 0;
-var startTime = 0;
-var endTime = 0;
-var lastRefresh = 0;
-var currentRefresh = 0;
-canvas = document.querySelector('#mirror');
-for(var i = 0; i < materials.file_names.length(); i++){
-	trialnumber = i;
-	canvas.getContext('2d').clearRect(0,0,canvas.width, canvas.length);
-	do_mirror();
+var pCorrect = 0;
+var pIncorrect = 0;
+var startSpot = false;
+
+
+//for drawing lines between ellipses
+var xarray = [];
+var yarray = [];
+//for images
+var lineLinks1 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37 ,38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75,
+76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99];
+
+function preload() {
+    //Preload images
+    for (i = 0; i<=lineLinks.length-1; i++) { //preload lines 
+        lineLinks1[i] = loadImage(lineLinks[i]);
+    }
 }
-function do_mirror() {
-	//load materials
-	var imagePath = materials.file_names[trialnumber];
-	mirror = materials.mirror[trialnumber];
-	var xstart = materials.xstarts[trialnumber];
-	var ystart = materials.ystarts[trialnumber];
-	var startRadius = 15;
-	var xend = materials.xends[trialnumber];
-	var yend = materials.yends[trialnumber];
-	var endRadius = 15;
-	//states to track
-	drawing = false;
-	finished = false;
-	score = 0;
-	timeDiff = 0;
-	timeFinished = 0;
-	var inline = false;
-	crossings = 0;
-	distance_total = 0;
-	distance_current = 0;
-	distance_inline = 0;
-	distance_offline = 0;
-	startTime = 0;
-	endTime = 0;
-	lastRefresh = 0;
-	currentRefresh = 0;
-	//drawing contexts for cursor area and mirrored area
-	ctx = canvas.getContext('2d');
-	canvas_mirror = document.querySelector('#mirror');
-	ctx_mirror = canvas_mirror.getContext('2d');
-	//load the image to trace
-	var imageObj = new Image();
-	imageObj.onload = function () {
-		ctx_mirror.drawImage(imageObj, 0, 0, mywidth, myheight);
-		ctx_mirror.globalAlpha = 0.4;
-		ctx.globalAlpha = 0.4;
-		ctx_mirror.beginPath();
-		ctx_mirror.arc(xstart, ystart, startRadius, 0, 2 * Math.PI, false);
-		ctx_mirror.fillStyle = 'green';
-		ctx_mirror.fill();
-		ctx_mirror.globalAlpha = 1;
-		ctx.globalAlpha = 1;
-		document.getElementById("status").innerHTML = "Click the green circle to begin this trial";
-	};
-	imageObj.crossOrigin = "anonymous";
-	imageObj.src = imagePath;
-	//defines data structure for mouse movement
-	var mouse = { x: 0, y: 0 };
-	var mouseold = { x: 0, y: 0 };
-	/* Drawing on Paint App */
-	ctx_mirror.lineWidth = 1.2;
-	ctx_mirror.lineJoin = 'round';
-	ctx_mirror.lineCap = 'round';
-	ctx_mirror.strokeStyle = 'blue';
-	/* Mouse Capturing Work */
-	canvas.addEventListener('mousemove', function (e) {
-		//get mouse coordinates
-		mouse.x = e.pageX - this.offsetLeft;
-		mouse.y = e.pageY - this.offsetTop;
-		//update status
-		var pos = betterPos(canvas, e);
-		//var pos = findPos(this);
-		//var x = e.pageX - pos.x;
-		//var y = e.pageY - pos.y;
-		var x = pos.x;
-		var y = pos.y;
-		mouse.x = x;
-		mouse.y = y;
-		//document.getElementById("status").innerHTML = "x = " + x + " y = " + y + " mousex = " + mouse.x + " mousey = " + mouse.y;
-		if (mirror) {
-			var coord = "x=" + (mywidth - x) + ", y=" + (myheight - y);
-		}
-		else {
-			var coord = "x=" + (x) + ", y=" + (y);
-		}
-		if (mirror) {
-			var p = ctx_mirror.getImageData(mywidth - mouse.x, myheight - mouse.y, 1, 1).data;
-		}
-		else {
-			var p = ctx_mirror.getImageData(mouse.x, mouse.y, 1, 1).data;
-		}
-		var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
-		var cendRadius = Math.sqrt(Math.pow(mouse.x - xend, 2) + Math.pow(mouse.y - yend, 2));
-		if (cendRadius < endRadius) {
-			if (drawing) {
-				drawing = false;
-				finished = true;
-				if (saveTrace) {
-					saveCanvas();
-					//call save function
-				}
-			}
-		}
-		//do drawing if in drawing mode
-		if (drawing) {
-			if (mouseold.x - mouse.x + mouseold.y - mouse.y != 0) {
-				distance_current = Math.sqrt(Math.pow(mouseold.x - mouse.x, 2) + Math.pow(mouseold.y - mouse.y, 2));
-			}
-			else {
-				distance_current = 0;
-			}
-			console.log(p[1] + p[2] + p[0], p[0], p[1], p[2]);
-			//check to see where we are drawing
-			if ((p[1] + p[2] + p[0] < 200 && p[0] < 70 && p[1] < 70 && p[2] < 70) | (p[0] > 60 && p[1] < 70 && p[2] < 70)) {
-				if (inline) {
-					distance_inline = distance_inline + distance_current;
-				}
-				else {
-					inline = true;
-					crossings = crossings + 1;
-					distance_inline = distance_inline + (0.5 * distance_current);
-					distance_offline = distance_offline + (0.5 * distance_current);
-					ctx_mirror.beginPath();
-					if (mirror) {
-						ctx_mirror.moveTo(mywidth - mouse.x, myheight - mouse.y);
-					}
-					else {
-						ctx_mirror.moveTo(mouse.x, mouse.y);
-					}
-				}
-			}
-			else {
-				if (inline) {
-					inline = false;
-					crossings = crossings + 1;
-					distance_inline = distance_inline + (0.5 * distance_current);
-					distance_offline = distance_offline + (0.5 * distance_current);
-					ctx_mirror.beginPath();
-					if (mirror) {
-						ctx_mirror.moveTo(mywidth - mouse.x, myheight - mouse.y);
-					}
-					else {
-						ctx_mirror.moveTo(mouse.x, mouse.y);
-					}
-				}
-				else {
-					distance_offline = distance_offline + distance_current;
-				}
-			}
-			distance_total = distance_total + distance_current;
-			score = distance_inline / distance_total;
-			endTime = new Date();
-			timeDiff = (endTime - startTime) / 1000;
-			if (inline) {
-				ctx_mirror.strokeStyle = 'red';
-			}
-			else {
-				ctx_mirror.strokeStyle = 'blue';
-			}
-			if (mirror) {
-				ctx_mirror.lineTo(mywidth - mouse.x, myheight - mouse.y);
-			}
-			else {
-				ctx_mirror.lineTo(mouse.x, mouse.y);
-			}
-			ctx_mirror.stroke();
-			document.getElementById("status").innerHTML = "Score = " + Math.round(score * 100) + "% ";
-			//document.getElementByID("status").innerHTML = p[0]+p[1]+p[2];
-		}
-		else {
-			if (!finished) {
-				currentRefresh = new Date();
-				if (currentRefresh - lastRefresh > (1000 / 30)) {
-					ctx_mirror.drawImage(imageObj, 0, 0, mywidth, myheight);
-					ctx_mirror.fillStyle = 'green';
-					ctx_mirror.globalAlpha = 0.4;
-					//ctx_mirror.beginPath();
-					if (mirror) {
-						//	ctx_mirror.arc(mywidth - xstart, myheight - ystart, startRadius, 0, 2 * Math.PI, false);
-					}
-					else {
-						//	ctx_mirror.arc(xstart, ystart, startRadius, 0, 2 * Math.PI, false);
-					}
-					// ctx_mirror.fill();
-					ctx_mirror.globalAlpha = 1;
-					ctx_mirror.beginPath();
-					if (mirror) {
-						ctx_mirror.arc(mywidth - mouse.x, myheight - mouse.y, 4, 0, 2 * Math.PI, false);
-					}
-					else {
-						ctx_mirror.arc(mouse.x, mouse.y, 4, 0, 2 * Math.PI, false);
-					}
-					ctx_mirror.fillStyle = 'green';
-					ctx_mirror.fill();
-					lastRefresh = currentRefresh;
-					document.getElementById("status").innerHTML = "Click the green circle to begin this trial";
-				}
-			}
-			else {
-				document.getElementById("status").innerHTML = "Finished with score = " + Math.round(score * 100);
-			}
-		}
-		//store current coordinates
-		mouseold.x = mouse.x;
-		mouseold.y = mouse.y;
-	}, false);
-	canvas.addEventListener('mousedown', function (e) {
-		var currentRadius = Math.sqrt(Math.pow(mouse.x - xstart, 2) + Math.pow(mouse.y - ystart, 2));
-		if (!finished) {
-			if (drawing) {
-				//drawing = false;
-				//finished = true;
-				//if (saveTrace) {
-				//	saveCanvas();
-				//call save function
-				//savecanvas(canvas_mirror.toDataURL())
-				//}
-			}
-			else {
-				if (currentRadius < startRadius) {
-					ctx.clearRect(0, 0, canvas.width, canvas.height);
-					ctx_mirror.drawImage(imageObj, 0, 0, mywidth, myheight);
-					ctx_mirror.fillStyle = 'red';
-					ctx_mirror.globalAlpha = 0.4;
-					ctx_mirror.beginPath();
-					if (mirror) {
-						ctx_mirror.arc(mywidth - xend, myheight - yend, endRadius, 0, 2 * Math.PI, false);
-					}
-					else {
-						ctx_mirror.arc(xend, yend, endRadius, 0, 2 * Math.PI, false);
-					}
-					ctx_mirror.fill();
-					ctx_mirror.globalAlpha = 1;
-					drawing = true;
-					finished = false;
-					startTime = new Date();
-					ctx_mirror.beginPath();
-					if (mirror) {
-						ctx_mirror.moveTo(mywidth - mouse.x, myheight - mouse.y);
-					}
-					else {
-						ctx_mirror.moveTo(mouse.x, mouse.y);
-					}
-				}
-			}
-		}
-	}, false);
-	var onPaint = function () {
-		if (mirror) {
-			ctx_mirror.lineTo(mywidth - mouse.x, myheight - mouse.y);
-		}
-		else {
-			ctx_mirror.lineTo(mouse.x, mouse.y);
-		}
-		ctx_mirror.stroke();
-	};
-	function betterPos(canvas, evt) {
-		var rect = canvas.getBoundingClientRect();
-		return {
-			x: evt.clientX - rect.left,
-			y: evt.clientY - rect.top
-		};
-	}
-	function findPos(obj) {
-		var curleft = 0, curtop = 0;
-		//document.getElementById("status").innerHTML = "Find pos: ";
-		if (obj.offsetParent) {
-			do {
-				curleft += obj.offsetLeft;
-				curtop += obj.offsetTop;
-				document.getElementById("status").innerHTML += obj.id + " Left: " + obj.offsetLeft + "Top: " + obj.offsetTop + " / ";
-			} while (obj = obj.offsetParent);
-			return { x: curleft, y: curtop };
-		}
-		return undefined;
-	}
-	function rgbToHex(r, g, b) {
-		if (r > 255 || g > 255 || b > 255)
-			throw "Invalid color component";
-		return ((r << 16) | (g << 8) | b).toString(16);
-	}
-	function saveCanvas() {
-		// Get the canvas screenshot as PNG
-		var screenshot = Canvas2Image.saveAsPNG(canvas_mirror, true);
-		// This is a little trick to get the SRC attribute from the generated <img> screenshot
-		canvas_mirror.parentNode.appendChild(screenshot);
-		screenshot.id = "canvasimage";
-		data = screenshot.src;
-		canvas_mirror.parentNode.removeChild(screenshot);
-		// Send the screenshot to PHP to save it on the server
-		var url = saveScript;
-		jQuery.ajax({
-			type: "POST",
-			url: url,
-			dataType: 'text',
-			data: {
-				id: MID,
-				trial: trialnumber,
-				score: score,
-				distance_inline: distance_inline,
-				distance_offline: distance_offline,
-				timeDiff: timeDiff,
-				crossings: crossings,
-				base64data: data
-			}
-		});
-	}
+
+// getPixel: fast access to pixel at location x, y from image 
+function getPixel(image, x, y) {
+    var i = 4 * (y * image.width + x);
+    return color(image.pixels[i], image.pixels[i + 1], image.pixels[i + 2]);
 }
+
+function setup() {
+    createCanvas(1000, 800);
+    //how images are converted to pixel arrays
+    pixelDensity(1);
+    currentImage = lineLinks1[0];
+    currentImage.loadPixels();
+}
+
+function draw() {
+    background(200, 200, 200);
+    //button for easier choice
+    stroke(0);
+    textAlign(CENTER);
+    textSize(25);
+    fill(250, 150);
+    rect(width/2 + 295, height/3, 200, 60);
+    fill(0);
+    text("Simpler Shape", width/2+395, height/3+40);
+
+    //render current images to canvas
+    image(currentImage, 0, 0);
+ 
+    var pScore = floor(pCorrect/(pCorrect+pIncorrect)*100);
+
+    // Initialize important variables. 
+    var currentImageW = currentImage.width; 
+    var currentImageH = currentImage.height;
+    var greenPixelX = 0; //brightestPixelX starts at 0
+    var greenPixelY = 0; //brightestPixelY starts at o
+
+    /*//For evaluating images to find green dot
+    for (x=0; x<=currentImageW; x+=10) { //evaluate x pixels
+        for (y=0; y<=currentImageH; y+=10) { //evaluate y pixels
+            //if x and y are bigger than the current brightest pixels
+            if (brightness(getPixel(currentImage, x, y))>63 && brightness(getPixel(currentImage, x, y))<64) {
+                greenPixelX = x; //set value of brightestpixelX to x 
+                greenPixelY = y; //set value of brightestpixelY to y
+            }
+        }
+    }
+    //color for the "start" dot
+    fill(0, 138, 230, 150);
+    noStroke(0);
+    ellipse(width-greenPixelX-285, height-greenPixelY-82, 20, 20);*/
+
+    stroke(0);
+    fill(0);
+    text('Score: ' + score, 800, 100);
+    text('Percent ' + pScore + '%', 800, 150);
+
+        //Drawing lines and changing colors
+        for (i = 0; i<xarray.length; i++) {
+            ellipse(xarray[i], yarray[i], 0.25, 0.25);
+            // adding lines between ellipses 
+            strokeWeight(2);
+            line(xarray[i], yarray[i], xarray[i+1], yarray[i+1]);
+            if(brightness(getPixel(currentImage, xarray[i], yarray[i])) == 0) {
+                stroke('red');
+                pCorrect += 1;
+            } 
+            if(brightness(getPixel(currentImage, xarray[i-1], yarray[i-1])) == 100) {
+                stroke('blue');
+                pIncorrect += 1;
+            }
+            if(brightness(getPixel(currentImage, width-mouseX-285, height-mouseY-82))>80 && brightness(getPixel(currentImage, width-mouseX-285, height-mouseY-82))<90 && brightness(getPixel(currentImage, width-mouseX-285+5, height-mouseY-82+5))>80 && brightness(getPixel(currentImage, width-mouseX-285+5, height-mouseY-82+5))<90) {
+                fill(0);
+                noStroke()
+                currentImage = lineLinks1[floor(random(0, lineLinks1.length-1))];
+                xarray.splice(0, xarray.length);
+                yarray.splice(0, yarray.length);
+                currentImage.loadPixels();
+                pCorrect = 0;
+                pIncorrect = 0;
+                score += 1;
+            }
+        }
+}
+
+function mouseDragged() {
+    if (mouseX>70.5 && mouseX<720-70.5 && mouseY>70.5 && mouseY<720-70.5) {
+        xarray.push(width-mouseX-285);
+        yarray.push(height-mouseY-82);
+    }
+}
+
+function mousePressed() {
+    if (mouseX>width/2+295 & mouseX<width/2+495 & mouseY>height/3 & mouseY<height/3+60) {
+        //set to choose random image in range of "easy" images
+        currentImage = lineLinks1[floor(random(0, 30))];
+        //clean array
+        xarray.splice(0, xarray.length);
+        yarray.splice(0, yarray.length);
+        pCorrect = 0;
+        pIncorrect = 0;
+    }
+    currentImage.loadPixels();  
+
+}
+
+
+
+
